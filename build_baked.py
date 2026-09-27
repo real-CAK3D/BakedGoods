@@ -53,12 +53,20 @@ def build():
     toc = "".join('<div class="bg-toc-cat"><h4>%s</h4><ol>%s</ol></div>' % (e(c), "".join('<li><a data-goto="%d">%s <span>%s</span></a></li>' % (pg, e(r["title"]), e(r.get("prep") or "")) for r, pg in items))
                   for c, items in cats.items())
     newest = max(rs, key=lambda r: r.get("date", "")) if rs else {}
-    pages = [fb.page("Baked Goods", ('<div class="gum"><span>HOME-BAKED FIXES · TESTED IN THE GARDEN</span></div>'
-                                     '<div class="pc-top">%s<div class="ear">%d<br>recipes<br><b>%s</b><br>%s</div></div>'
-                                     '<div class="flag"><div class="est">THE GARDEN KITCHEN · EST. 2026</div><h1>Baked<br>Goods</h1><div class="motto">Tried, tested &amp; fresh out of the oven</div></div>'
-                                     '<div class="pc-band"><span>PI</span><span>HOME ASSISTANT</span><span>AGENTS</span></div>'
-                                     '<div class="pc-teaser"><div class="kicker">Fresh this week</div><b>%s</b></div><div class="pc-open">Open the cookbook ›</div>')
-                     % (seal, len(rs), today.strftime("%b %-d").upper(), today.year, e(newest.get("title") or "The first batch")), " hardcover"),
+    mo = today.strftime("%Y-%m")
+    art = pk.draw_image(os.path.join(SITE, "img", "covers", mo + ".jpg"), (
+        "Bright, airy editorial food photograph for the cover of an upscale home-living and entertaining magazine, vertical, no text or lettering. "
+        "A beautiful homemade %s dessert (a lattice-top fruit pie or a frosted layer cake, whichever suits the season) on a white footed cake stand, "
+        "set on a pale sage-green linen with a vintage silver cake server and a small sprig of fresh herbs; as a playful garnish, one tiny green circuit board "
+        "tucked beside the plate like a place card. Soft north-window daylight, gentle shadows, pastel palette, crisp and elegant styling, shallow depth of field. "
+        "The top third is clean soft white background with nothing in it, and the left edge is calm and uncluttered for cover lines." % pk.SEASONS.get(today.month, "autumn")),
+        size="1024x1536")
+    pages = [fb.page("Baked Goods", (
+        '<div class="mx%s">%s<div class="mx-kick">THE GARDEN KITCHEN</div><h1 class="mx-t">Baked Goods</h1><div class="mx-date">%s · %d RECIPES</div>'
+        '<div class="mx-lines"><div><small>Fresh this week</small><b>%s</b></div><div><small>Tried &amp; tested</small><b>Fixes that actually worked</b></div>'
+        '<div><small>Inside</small><b>Pi · Home Assistant · Agents</b></div></div><div class="mx-foot"><span class="mx-seal">%s</span><span>Open the cookbook ›</span></div></div>')
+        % ("" if art else " mx-noimg", ('<img class="mx-photo" src="../img/covers/%s.jpg" alt="A styled homemade dessert">' % mo) if art else "",
+           today.strftime("%B %Y").upper(), len(rs), e(newest.get("title") or "The first batch"), seal), " hardcover bg-cov"),
              fb.page("Contents", '<div class="bg-toc"><h2 class="bg-title">What\'s Cooking</h2><p class="small">Tap a recipe to turn to it.</p>%s</div>' % (toc or '<p>No recipes yet.</p>'))]
     pages += body
     pages.append(fb.page("Back Page", ('<div class="gum"><span>BAKED GOODS · THE GARDEN KITCHEN</span></div><div class="pb-body">%s<h2 class="pb-title">Baked Goods</h2>'
@@ -69,7 +77,8 @@ def build():
                    flap="Baked Goods · the Garden's cookbook of fixes", body_class="pub-bg", est="THE GARDEN KITCHEN · EST. 2026")
     open(os.path.join(SITE, "index.html"), "w").write(html.replace('href="../', 'href="').replace('src="../', 'src="'))
     dates = sorted({r.get("date", "") for r in rs if r.get("date")}, reverse=True)
-    pk.latest(SITE, "Baked Goods", dates[0] if dates else today.isoformat(), "%d recipes — fresh: %s" % (len(rs), newest.get("title") or "—"), "", dates[:10])
+    pk.latest(SITE, "Baked Goods", dates[0] if dates else today.isoformat(), "%d recipes — fresh: %s" % (len(rs), newest.get("title") or "—"), "", dates[:10],
+              cover=("img/covers/%s.jpg" % mo) if art else "")
     print("baked goods built: %d recipes" % len(rs))
 
 

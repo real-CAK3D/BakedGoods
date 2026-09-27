@@ -733,3 +733,19 @@ body.pub-bg .pb-body { background: rgba(251,246,234,.92); padding: 16px; border-
 .bg-toc-cat { break-inside: avoid; margin-bottom: 12px; } .bg-toc-cat h4 { font: 700 13px/1.2 Oswald, sans-serif; letter-spacing: .12em; text-transform: uppercase; color: #b3261e; border-bottom: 2px solid #5a1414; margin: 0 0 4px; }
 .bg-toc-cat a { cursor: pointer; color: var(--ink); text-decoration: none; display: flex; justify-content: space-between; gap: 8px; border-bottom: 1px dotted #c9b8a0; padding: 4px 0; }
 .bg-toc-cat a span { color: var(--muted); font-size: 13px; white-space: nowrap; }
+/* ---- the cover: an upscale home-living catalog (white, a big Didone masthead over a styled food photo, quiet tracked cover lines) ---- */
+.page-in.bg-cov { padding: 0 !important; background: #fbfaf7 !important; }
+.mx { position: relative; height: 100%; overflow: hidden; color: #1f2a26; background: #fbfaf7; }
+.mx-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.mx > *:not(.mx-photo) { position: relative; z-index: 2; }
+.mx-kick { text-align: center; padding-top: 18px; font: 600 11px/1 "Josefin Sans", sans-serif; letter-spacing: .5em; color: #5d7a6c; }
+.mx-t { text-align: center; margin: 4px 0 0; font: 400 clamp(54px, 12.5vw, 112px)/.95 "Playfair Display", Didot, "Bodoni 72", serif; color: #1f2a26; letter-spacing: -.02em; }
+.mx-date { text-align: center; margin-top: 6px; font: 300 11px/1 "Josefin Sans", sans-serif; letter-spacing: .42em; color: #1f2a26; }
+.mx-lines { position: absolute !important; left: 22px; right: 22px; top: 20%; display: flex; gap: 14px; text-align: center; }
+.mx-lines > div { flex: 1 1 0; }
+.mx-lines small { display: block; font: 600 10px/1 "Josefin Sans", sans-serif; letter-spacing: .32em; text-transform: uppercase; color: #b0524a; margin-bottom: 4px; }
+.mx-lines b { display: block; font: 400 16px/1.2 "Playfair Display", serif; font-style: italic; color: #1f2a26; text-shadow: 0 0 12px rgba(251,250,247,.9), 0 0 3px rgba(251,250,247,.9); }
+.mx-foot { position: absolute !important; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; align-items: center; padding: 10px 18px 14px;
+  font: 600 11px/1 "Josefin Sans", sans-serif; letter-spacing: .3em; text-transform: uppercase; color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,.5); }
+.mx-seal .seal { width: 40px; height: 40px; }
+.mx.mx-noimg { background: linear-gradient(#fbfaf7 55%, #dfe8e0); }
