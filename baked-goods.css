@@ -749,3 +749,8 @@ body.pub-bg .pb-body { background: rgba(251,246,234,.92); padding: 16px; border-
   font: 600 11px/1 "Josefin Sans", sans-serif; letter-spacing: .3em; text-transform: uppercase; color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,.5); }
 .mx-seal .seal { width: 40px; height: 40px; }
 .mx.mx-noimg { background: linear-gradient(#fbfaf7 55%, #dfe8e0); }
+/* the page counter wears its own dark tag, so it reads on every paper and every cover */
+.pager .where, body.on-cover .pager .where { display: inline-flex; flex-direction: column; align-items: center; gap: 2px; margin: 0 auto; padding: 5px 14px 6px;
+  border-radius: 14px; background: rgba(22,15,10,.86) !important; color: #f5eedb !important; box-shadow: 0 2px 6px rgba(0,0,0,.35); }
+.pager .dots button, body.on-cover .pager .dots button { border-color: #f5eedb !important; background: transparent; }
+.pager .dots button.on, body.on-cover .pager .dots button.on { background: #f5eedb !important; }
